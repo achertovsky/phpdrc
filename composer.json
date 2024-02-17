@@ -1,0 +1,23 @@
+{
+    "name": "achertovsky/phpdrc",
+    "description": "dependency rule checker",
+    "require": {
+        "php": "^8.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10"
+    },
+    "autoload": {
+        "psr-4": {
+            "achertovsky\\DRC\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "achertovsky\\DRC\\Tests\\": "tests/"
+        }
+    },
+    "licence": "MIT",
+    "type": "library",
+    "version": "0.1.0"
+}
