@@ -20,5 +20,9 @@
         <include>
             <directory>src</directory>
         </include>
+        <exclude>
+            <directory>src/Bridge</directory>
+            <directory>src/Core/Entity</directory>
+        </exclude>
     </source>
 </phpunit>

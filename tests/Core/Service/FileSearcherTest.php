@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace achertovsky\DRC\Tests;
+namespace achertovsky\DRC\Tests\Core\Service;
 
 use PHPUnit\Framework\TestCase;
-use achertovsky\DRC\FileSearcher;
+use achertovsky\DRC\Core\Service\FileSearcher;
 
 class FileSearcherTest extends TestCase
 {

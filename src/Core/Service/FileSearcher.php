@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace achertovsky\DRC;
+namespace achertovsky\DRC\Core\Service;
 
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
-use RecursiveRegexIterator;
 use RegexIterator;
+use RecursiveRegexIterator;
+use RecursiveIteratorIterator;
+use RecursiveDirectoryIterator;
 
 class FileSearcher
 {
