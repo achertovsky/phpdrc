@@ -11,8 +11,6 @@ use RegexIterator;
 
 class FileSearcher
 {
-
-
     public function __construct(
         private string $baseDirectory
     ) {
@@ -20,11 +18,9 @@ class FileSearcher
 
     public function search(string $directory): array
     {
-        // @todo: add ending slash check and directory starting slash
-        $directoryIterator = new RecursiveDirectoryIterator($this->baseDirectory . $directory);
+        $directoryIterator = new RecursiveDirectoryIterator($this->baseDirectory . $this->getDirectoryPath($directory));
         $recursiveIterator = new RecursiveIteratorIterator($directoryIterator);
         $fileIterator = new RegexIterator($recursiveIterator, '#^'.$this->baseDirectory.'(.+\.php)$#i', RecursiveRegexIterator::GET_MATCH);
-        //var_dump(iterator_to_array($fileIterator, false));
 
         $files = [];
         foreach ($fileIterator as $file) {
@@ -32,5 +28,10 @@ class FileSearcher
         }
 
         return $files;
+    }
+
+    private function getDirectoryPath(string $directory): string
+    {
+        return ltrim($directory, '/');
     }
 }

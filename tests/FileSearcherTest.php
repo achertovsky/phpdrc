@@ -34,4 +34,19 @@ class FileSearcherTest extends TestCase
             $filePaths
         );
     }
+
+    public function testWouldIgnoreSlashPrefixInPath(): void
+    {
+        $filePaths = $this->fileSearcher->search('/file_searcher_fixtures/');
+        sort($filePaths);
+
+        $this->assertEquals(
+            [
+                'file_searcher_fixtures/Directory1/file1.php',
+                'file_searcher_fixtures/Directory1/file2.php',
+                'file_searcher_fixtures/file3.php',
+            ],
+            $filePaths
+        );
+    }
 }
