@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace achertovsky\DRC\Core\Entity;
 
-class ParsedFileContent
+class Violation
 {
     public function __construct(
         private string $filePath,
-        private string $namespace,
-        private array $uses
+        private array $wrongUses
     ) {}
 
     public function getFilePath(): string
@@ -17,13 +16,11 @@ class ParsedFileContent
         return $this->filePath;
     }
 
-    public function getNamespace(): string
+    /**
+     * @return string[]
+     */
+    public function getWrongUses(): array
     {
-        return $this->namespace;
-    }
-
-    public function getUses(): array
-    {
-        return $this->uses;
+        return $this->wrongUses;
     }
 }

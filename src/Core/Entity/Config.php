@@ -22,6 +22,11 @@ class Config
         return array_keys($this->coreNamespaces);
     }
 
+    public function isCoreNamespace(string $namespace): bool
+    {
+        return in_array($namespace, $this->coreNamespaces, true);
+    }
+
     public function getNamespacesAllowedInCoreNamespace(string $namespace): array
     {
         return $this->coreNamespaces[$namespace];

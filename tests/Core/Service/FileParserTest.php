@@ -21,6 +21,7 @@ class FileParserTest extends TestCase
     {
         $this->assertEquals(
             new ParsedFileContent(
+                __FILE__,
                 'achertovsky\DRC\Tests\Core\Service',
                 [
                     'PHPUnit\Framework\TestCase',

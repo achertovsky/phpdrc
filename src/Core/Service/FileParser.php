@@ -28,6 +28,7 @@ class FileParser
         }
 
         return new ParsedFileContent(
+            $path,
             $namespace,
             $uses
         );
