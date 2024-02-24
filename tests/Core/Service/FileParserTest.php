@@ -25,6 +25,7 @@ class FileParserTest extends TestCase
                 [
                     'PHPUnit\Framework\TestCase',
                     'achertovsky\DRC\Core\Service\FileParser',
+                    'achertovsky\DRC\Core\Entity\ParsedFileContent',
                 ]
             ),
             $this->parser->parse(__FILE__)
