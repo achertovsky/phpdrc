@@ -16,6 +16,10 @@ class ConfigParser
 
     public function parse(string $path): Config
     {
+        if (!file_exists($path)) {
+            throw new LogicException('File not found');
+        }
+
         $configArray = $this->yamlParser->parse($path);
         foreach ($configArray as $coreNamespace => $allowedNamespaces) {
             if (!is_string($coreNamespace)) {

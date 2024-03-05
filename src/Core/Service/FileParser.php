@@ -11,7 +11,6 @@ class FileParser
     private const USE_BLOCK = 'use ';
     private const NAMESPACE_BLOCK = 'namespace ';
 
-    /** @todo implement according to test expectations */
     public function parse(string $path): ParsedFileContent
     {
         $lines = file($path, FILE_IGNORE_NEW_LINES);

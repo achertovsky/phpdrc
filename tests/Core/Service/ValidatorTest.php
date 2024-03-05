@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace achertovsky\DRC\Tests\Core\Service;
 
-use achertovsky\DRC\Core\Entity\Config;
-use achertovsky\DRC\Core\Entity\ParsedFileContent;
-use achertovsky\DRC\Core\Entity\Violation;
-use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+use achertovsky\DRC\Core\Entity\Config;
+use achertovsky\DRC\Core\Entity\Violation;
 use achertovsky\DRC\Core\Service\Validator;
+use PHPUnit\Framework\Attributes\DataProvider;
+use achertovsky\DRC\Core\Entity\ParsedFileContent;
 
 class ValidatorTest extends TestCase
 {
     private const FILE_PATH = 'directory/file.php';
-    private const NAMESPACE_ENTITY = 'App\Entity';
     private const NAMESPACE_SERVICE = 'App\Service';
     private const CLASS_ENTITY = 'App\Entity\Class';
     private const CLASS_SERVICE = 'App\Service\Class';
@@ -35,7 +34,7 @@ class ValidatorTest extends TestCase
     ): void {
         $this->assertEquals(
             $expectedViolation,
-            $this->validator->getViolation(
+            $this->validator->validate(
                 $parsedFileContent,
                 $config
             )

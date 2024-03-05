@@ -31,7 +31,7 @@ class ConfigParserTest extends TestCase
         array $expectedCoreNamespaces,
         array $expectedNamespacesAllowedInCoreNamespace
     ): void {
-        $path = '';
+        $path = __FILE__;
 
         $this->yamlParser
             ->method('parse')
@@ -91,7 +91,7 @@ class ConfigParserTest extends TestCase
         ;
 
         $this->expectException(LogicException::class);
-        $this->parser->parse('');
+        $this->parser->parse(__FILE__);
     }
 
     public static function dataWouldThrowException(): array
@@ -110,5 +110,12 @@ class ConfigParserTest extends TestCase
                 ],
             ],
         ];
+    }
+
+    public function testIssueParseWontWorkAsNoFileExist(): void
+    {
+        $this->expectException(LogicException::class);
+
+        $this->parser->parse('non-existent-file');
     }
 }

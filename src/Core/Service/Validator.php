@@ -10,7 +10,7 @@ use achertovsky\DRC\Core\Entity\Config;
 
 class Validator implements ValidatorInterface
 {
-    public function getViolation(
+    public function validate(
         ParsedFileContent $fileContent,
         Config $config
     ): ?Violation {
