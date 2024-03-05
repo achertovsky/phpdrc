@@ -11,7 +11,7 @@ use achertovsky\DRC\Core\Service\FileParser;
 use achertovsky\DRC\Core\Service\ConfigParser;
 use achertovsky\DRC\Core\Service\FileSearcher;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -19,8 +19,16 @@ require_once __DIR__ . '/vendor/autoload.php';
 $application = new Application();
 $application
     ->register('drc')
-    ->addArgument('checkPath', InputArgument::OPTIONAL)
-    ->addArgument('configPath', InputArgument::OPTIONAL)
+    ->addOption(
+        'checkPath',
+        'p',
+        InputOption::VALUE_OPTIONAL
+    )
+    ->addOption(
+        'configPath',
+        'c',
+        InputOption::VALUE_OPTIONAL
+    )
     ->setCode(function (InputInterface $input): int {
         (new App(
             new ConfigParser(
@@ -31,8 +39,8 @@ $application
             new Validator(),
             new Printer()
         ))->run(
-            '' . ($input->getArgument('checkPath') ?? __DIR__),
-            '' . ($input->getArgument('configPath') ?? __DIR__ . '/config.yaml')
+            '' . ($input->getOption('checkPath') ?? __DIR__),
+            '' . ($input->getOption('configPath') ?? __DIR__ . '/config.yaml')
         );
 
         return Command::SUCCESS;
