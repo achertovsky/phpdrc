@@ -31,8 +31,8 @@ $application
             new Validator(),
             new Printer()
         ))->run(
-            $input->getArgument('checkPath') ?? __DIR__,
-            $input->getArgument('configPath') ?? __DIR__ . '/config.yaml'
+            '' . ($input->getArgument('checkPath') ?? __DIR__),
+            '' . ($input->getArgument('configPath') ?? __DIR__ . '/config.yaml')
         );
 
         return Command::SUCCESS;

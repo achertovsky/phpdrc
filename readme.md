@@ -29,3 +29,8 @@ docker run -eXDEBUG_MODE=off -m 200m --cpus 0.3 --rm -it -u $(id -u):$(id -g) -w
 ```
 docker run -m 200m --cpus 0.3 --rm -it --add-host=host.docker.internal:host-gateway -u $(id -u):$(id -g) -w /tmp -v ${PWD}:/tmp phpdrc vendor/bin/phpunit
 ```
+
+## build
+```
+docker run -m 200m --cpus 0.3 --rm -it --add-host=host.docker.internal:host-gateway -u $(id -u):$(id -g) -w /tmp -e XDEBUG_MODE=off -v ${PWD}:/tmp phpdrc sh build.sh
+```
