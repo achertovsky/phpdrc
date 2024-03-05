@@ -1,0 +1,5 @@
+.phpunit.result.cache
+vendor
+.vscode
+.idea
+box
