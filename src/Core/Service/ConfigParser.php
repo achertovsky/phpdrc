@@ -17,7 +17,7 @@ class ConfigParser
     public function parse(string $path): Config
     {
         if (!file_exists($path)) {
-            throw new LogicException('File not found');
+            throw new LogicException('Config file not found');
         }
 
         $configArray = $this->yamlParser->parse($path);
