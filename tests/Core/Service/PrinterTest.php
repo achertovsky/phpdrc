@@ -19,7 +19,7 @@ class PrinterTest extends TestCase
         $this->printer = new Printer();
     }
 
-    public function testPrint()
+    public function testPrint(): void
     {
         $violation = new Violation(
             'file.php',

@@ -16,14 +16,22 @@ class FileSearcher
     ) {
     }
 
+    /**
+     * @return string[]
+     */
     public function search(string $directory): array
     {
         $directoryIterator = new RecursiveDirectoryIterator($this->baseDirectory . $this->getDirectoryPath($directory));
         $recursiveIterator = new RecursiveIteratorIterator($directoryIterator);
-        $fileIterator = new RegexIterator($recursiveIterator, '#^'.$this->baseDirectory.'(.+\.php)$#i', RecursiveRegexIterator::GET_MATCH);
+        $fileIterator = new RegexIterator(
+            $recursiveIterator,
+            '#^' . $this->baseDirectory . '(.+\.php)$#i',
+            RecursiveRegexIterator::GET_MATCH
+        );
 
         $files = [];
         foreach ($fileIterator as $file) {
+            /** @var array<int, string> $file */
             $files[] = $file[1];
         }
 

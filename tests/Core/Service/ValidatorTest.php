@@ -41,6 +41,7 @@ class ValidatorTest extends TestCase
         );
     }
 
+    // @phpstan-ignore-next-line
     public static function dataTestFileValidation(): array
     {
         return [

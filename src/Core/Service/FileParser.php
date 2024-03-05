@@ -14,9 +14,10 @@ class FileParser
     public function parse(string $path): ParsedFileContent
     {
         $lines = file($path, FILE_IGNORE_NEW_LINES);
-        $namespace = null;
+        $namespace = '';
         $uses = [];
 
+        /** @var string[] $lines */
         foreach ($lines as $line) {
             if (strpos($line, self::USE_BLOCK) === 0) {
                 $uses[] = trim(substr($line, strlen(self::USE_BLOCK), -1));

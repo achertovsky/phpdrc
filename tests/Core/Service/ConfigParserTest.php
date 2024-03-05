@@ -25,6 +25,10 @@ class ConfigParserTest extends TestCase
         );
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.LongVariable)
+     */
+    // @phpstan-ignore-next-lines
     #[DataProvider('dataParse')]
     public function testParse(
         array $yamlParsedContent,
@@ -52,6 +56,7 @@ class ConfigParserTest extends TestCase
         );
     }
 
+    // @phpstan-ignore-next-line
     public static function dataParse(): array
     {
         return [
@@ -81,6 +86,7 @@ class ConfigParserTest extends TestCase
         ];
     }
 
+    // @phpstan-ignore-next-line
     #[DataProvider('dataWouldThrowException')]
     public function testWouldThrowException(
         array $yamlParsedContent
@@ -94,6 +100,7 @@ class ConfigParserTest extends TestCase
         $this->parser->parse(__FILE__);
     }
 
+    // @phpstan-ignore-next-line
     public static function dataWouldThrowException(): array
     {
         return [

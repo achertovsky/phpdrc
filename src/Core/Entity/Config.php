@@ -7,26 +7,25 @@ namespace achertovsky\DRC\Core\Entity;
 class Config
 {
     /**
-     * @var array<string, string[]>
+     * @param array<string, array<string>> $coreNamespaces
      */
-    private array $coreNamespaces;
-
     public function __construct(
-        array $coreNamespaces
+        private array $coreNamespaces
     ) {
         $this->coreNamespaces = $coreNamespaces;
     }
 
+    /**
+     * @return string[]
+     */
     public function getCoreNamespaces(): array
     {
         return array_keys($this->coreNamespaces);
     }
 
-    public function isCoreNamespace(string $namespace): bool
-    {
-        return in_array($namespace, $this->coreNamespaces, true);
-    }
-
+    /**
+     * @return string[]
+     */
     public function getNamespacesAllowedInCoreNamespace(string $namespace): array
     {
         return $this->coreNamespaces[$namespace];

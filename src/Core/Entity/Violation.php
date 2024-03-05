@@ -6,10 +6,14 @@ namespace achertovsky\DRC\Core\Entity;
 
 class Violation
 {
+    /**
+     * @param string[] $wrongUses
+     */
     public function __construct(
         private string $filePath,
         private array $wrongUses
-    ) {}
+    ) {
+    }
 
     public function getFilePath(): string
     {

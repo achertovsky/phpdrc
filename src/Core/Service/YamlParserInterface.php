@@ -6,5 +6,6 @@ namespace achertovsky\DRC\Core\Service;
 
 interface YamlParserInterface
 {
+    // @phpstan-ignore-next-line
     public function parse(string $path): array;
 }

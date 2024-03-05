@@ -46,6 +46,9 @@ class AppTest extends TestCase
         );
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     */
     public function testRun(): void
     {
         $rootNamespace = 'achertovsky\DRC';

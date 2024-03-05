@@ -6,11 +6,15 @@ namespace achertovsky\DRC\Core\Entity;
 
 class ParsedFileContent
 {
+    /**
+     * @param string[] $uses
+     */
     public function __construct(
         private string $filePath,
         private string $namespace,
         private array $uses
-    ) {}
+    ) {
+    }
 
     public function getFilePath(): string
     {
@@ -22,6 +26,9 @@ class ParsedFileContent
         return $this->namespace;
     }
 
+    /**
+     * @return string[]
+     */
     public function getUses(): array
     {
         return $this->uses;

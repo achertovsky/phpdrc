@@ -9,8 +9,13 @@ use achertovsky\DRC\Core\Service\YamlParserInterface;
 
 class YamlParser implements YamlParserInterface
 {
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
+    // @phpstan-ignore-next-line
     public function parse(string $path): array
     {
+        // @phpstan-ignore-next-line
         return Yaml::parseFile($path);
     }
 }

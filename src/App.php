@@ -28,10 +28,7 @@ class App
     ): void {
         $config = $this->configParser->parse($configPath);
 
-        $filesList = $this->fileSearcher->search(
-            $rootDir,
-            $config
-        );
+        $filesList = $this->fileSearcher->search($rootDir);
         foreach ($filesList as $file) {
             $parsedFileContent = $this->fileParser->parse($file);
             $violation = $this->validator->validate(
