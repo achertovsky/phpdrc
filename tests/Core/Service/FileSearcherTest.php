@@ -27,9 +27,9 @@ class FileSearcherTest extends TestCase
 
         $this->assertEquals(
             [
-                'file_searcher_fixtures/Directory1/file1.php',
-                'file_searcher_fixtures/Directory1/file2.php',
-                'file_searcher_fixtures/file3.php',
+                __DIR__ . '/file_searcher_fixtures/Directory1/file1.php',
+                __DIR__ . '/file_searcher_fixtures/Directory1/file2.php',
+                __DIR__ . '/file_searcher_fixtures/file3.php',
             ],
             $filePaths
         );
@@ -42,9 +42,9 @@ class FileSearcherTest extends TestCase
 
         $this->assertEquals(
             [
-                'file_searcher_fixtures/Directory1/file1.php',
-                'file_searcher_fixtures/Directory1/file2.php',
-                'file_searcher_fixtures/file3.php',
+                __DIR__ . '/file_searcher_fixtures/Directory1/file1.php',
+                __DIR__ . '/file_searcher_fixtures/Directory1/file2.php',
+                __DIR__ . '/file_searcher_fixtures/file3.php',
             ],
             $filePaths
         );

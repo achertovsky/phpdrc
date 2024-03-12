@@ -15,6 +15,8 @@ class ValidatorTest extends TestCase
 {
     private const FILE_PATH = 'directory/file.php';
     private const NAMESPACE_SERVICE = 'App\Service';
+    private const NAMESPACE_ROOT = 'App';
+    private const NAMESPACE_THIRD_PARTY = 'Third\Party';
     private const CLASS_ENTITY = 'App\Entity\Class';
     private const CLASS_SERVICE = 'App\Service\Class';
     private const CLASS_THIRD_PARTY = 'Third\Party\Class';
@@ -41,6 +43,9 @@ class ValidatorTest extends TestCase
         );
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     */
     // @phpstan-ignore-next-line
     public static function dataTestFileValidation(): array
     {
@@ -53,6 +58,20 @@ class ValidatorTest extends TestCase
                     []
                 ),
                 new Config([])
+            ],
+            'parsed file does not match config' => [
+                null,
+                new ParsedFileContent(
+                    self::FILE_PATH,
+                    self::NAMESPACE_SERVICE,
+                    [
+                        self::CLASS_ENTITY,
+                        self::CLASS_SERVICE
+                    ]
+                ),
+                new Config([
+                    self::NAMESPACE_THIRD_PARTY => [],
+                ])
             ],
             'valid namespace with no uses' => [
                 null,
@@ -82,7 +101,7 @@ class ValidatorTest extends TestCase
                     ]
                 ])
             ],
-            'valid namespace with allowed partial use' => [
+            'valid namespace with allowed partial use of self' => [
                 null,
                 new ParsedFileContent(
                     self::FILE_PATH,
@@ -95,9 +114,40 @@ class ValidatorTest extends TestCase
                     self::NAMESPACE_SERVICE => []
                 ])
             ],
+            'partial valid namespace' => [
+                null,
+                new ParsedFileContent(
+                    self::FILE_PATH,
+                    self::NAMESPACE_SERVICE,
+                    [
+                        self::CLASS_ENTITY
+                    ]
+                ),
+                new Config([
+                    self::NAMESPACE_ROOT => [
+                        self::CLASS_ENTITY
+                    ]
+                ])
+            ],
+            'valid namespace with allowed partial use of another namespace' => [
+                null,
+                new ParsedFileContent(
+                    self::FILE_PATH,
+                    self::NAMESPACE_SERVICE,
+                    [
+                        self::CLASS_THIRD_PARTY
+                    ]
+                ),
+                new Config([
+                    self::NAMESPACE_SERVICE => [
+                        self::NAMESPACE_THIRD_PARTY,
+                    ]
+                ])
+            ],
             'violation with non whitelisted third party class' => [
                 new Violation(
                     self::FILE_PATH,
+                    self::NAMESPACE_SERVICE,
                     [
                         self::CLASS_THIRD_PARTY,
                     ]

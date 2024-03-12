@@ -118,6 +118,7 @@ class AppTest extends TestCase
         $violation1 = null;
         $violation2 = new Violation(
             $file2,
+            'Namespace1',
             [
                 'entity3',
             ]

@@ -17,6 +17,7 @@ use Symfony\Component\Console\Input\InputInterface;
 require_once __DIR__ . '/vendor/autoload.php';
 
 $application = new Application();
+$currentDirectory = (string)posix_getcwd();
 $application
     ->register('drc')
     ->addOption(
@@ -29,18 +30,18 @@ $application
         'c',
         InputOption::VALUE_OPTIONAL
     )
-    ->setCode(function (InputInterface $input): int {
+    ->setCode(function (InputInterface $input) use ($currentDirectory): int {
         (new App(
             new ConfigParser(
                 new YamlParser()
             ),
-            new FileSearcher(__DIR__),
+            new FileSearcher($currentDirectory),
             new FileParser(),
             new Validator(),
             new Printer()
         ))->run(
-            '' . ($input->getOption('checkPath') ?? __DIR__),
-            '' . ($input->getOption('configPath') ?? __DIR__ . '/config.yaml')
+            '' . ($input->getOption('checkPath') ?? ''),
+            '' . ($input->getOption('configPath') ?? $currentDirectory . '/phpdrc.yaml')
         );
 
         return Command::SUCCESS;

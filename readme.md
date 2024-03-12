@@ -12,7 +12,7 @@ Requires config to work. Example of config:
     - namespace\you\allow\there1
     - namespace\you\allow\there2
 ```
-Keep in mind that in namespaces you want to check also in a list of allowed. So if you check `App\Core` all uses with that namespace prefix would be automatically allowed.
+Keep in mind that in namespaces you want to check also in a list of allowed. So if you check `App\Core` all uses with that namespace prefix would be automatically allowed. If multiple entries match, the first matching entry will be the only one to be used.
 
 # Development
 ## install env
@@ -33,4 +33,11 @@ docker run -m 200m --cpus 0.3 --rm -it --add-host=host.docker.internal:host-gate
 ## build
 ```
 docker run -m 200m --cpus 0.3 --rm -it --add-host=host.docker.internal:host-gateway -u $(id -u):$(id -g) -w /tmp -e XDEBUG_MODE=off -v ${PWD}:/tmp phpdrc sh build.sh
+```
+
+### code analysis
+```
+docker run --rm -it -u ${UID} -v ${PWD}:/app -w /app achertovsky/phptools all
+// if want to analyze only staged files
+docker run --rm -it -u ${UID} -v ${PWD}:/app -w /app achertovsky/phptools all -m
 ```

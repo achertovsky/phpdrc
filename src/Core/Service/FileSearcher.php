@@ -21,11 +21,12 @@ class FileSearcher
      */
     public function search(string $directory): array
     {
-        $directoryIterator = new RecursiveDirectoryIterator($this->baseDirectory . $this->getDirectoryPath($directory));
+        $baseDirectory = rtrim($this->baseDirectory, '/') . '/';
+        $directoryIterator = new RecursiveDirectoryIterator($baseDirectory . $this->getDirectoryPath($directory));
         $recursiveIterator = new RecursiveIteratorIterator($directoryIterator);
         $fileIterator = new RegexIterator(
             $recursiveIterator,
-            '#^' . $this->baseDirectory . '(.+\.php)$#i',
+            '#^(.+\.php)$#i',
             RecursiveRegexIterator::GET_MATCH
         );
 
