@@ -15,21 +15,21 @@ class Validator implements ValidatorInterface
         Config $config
     ): ?Violation {
         $coreNamespaces = $config->getCoreNamespaces();
-        $isCoreNamespace = false;
+        $foundCoreNamespace = null;
         foreach ($coreNamespaces as $coreNamespace) {
             if (strpos($fileContent->getNamespace(), $coreNamespace) === 0) {
-                $isCoreNamespace = true;
+                $foundCoreNamespace = $coreNamespace;
                 break;
             }
         }
 
-        if (!$isCoreNamespace) {
+        if ($foundCoreNamespace === null) {
             return null;
         }
 
         $allowedNamespaces = array_merge(
             [$fileContent->getNamespace() . '\\'],
-            $config->getNamespacesAllowedInCoreNamespace($fileContent->getNamespace())
+            $config->getNamespacesAllowedInCoreNamespace($foundCoreNamespace)
         );
 
         $violatedUses = [];
@@ -46,6 +46,7 @@ class Validator implements ValidatorInterface
         if (count($violatedUses) > 0) {
             return new Violation(
                 $fileContent->getFilePath(),
+                $fileContent->getNamespace(),
                 $violatedUses
             );
         }

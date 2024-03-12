@@ -11,6 +11,7 @@ class Violation
      */
     public function __construct(
         private string $filePath,
+        private string $namespace,
         private array $wrongUses
     ) {
     }
@@ -26,5 +27,10 @@ class Violation
     public function getWrongUses(): array
     {
         return $this->wrongUses;
+    }
+
+    public function getNamespace(): string
+    {
+        return $this->namespace;
     }
 }

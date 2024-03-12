@@ -10,9 +10,10 @@ class Printer implements PrinterInterface
 {
     public function print(Violation $violation): void
     {
-        echo $violation->getFilePath() . ':' . PHP_EOL;
+        echo $violation->getFilePath() . ' (' . $violation->getNamespace() . '):' . PHP_EOL;
         foreach ($violation->getWrongUses() as $wrongUse) {
             echo $wrongUse . PHP_EOL;
         }
+        echo PHP_EOL;
     }
 }

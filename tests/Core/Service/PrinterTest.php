@@ -23,6 +23,7 @@ class PrinterTest extends TestCase
     {
         $violation = new Violation(
             'file.php',
+            'App1',
             [
                 'use entity1',
                 'use entity2'
@@ -33,9 +34,10 @@ class PrinterTest extends TestCase
         $output = ob_get_clean();
 
         $this->assertEquals(
-            'file.php:' . PHP_EOL
+            'file.php (App1):' . PHP_EOL
             . 'use entity1' . PHP_EOL
-            . 'use entity2' . PHP_EOL,
+            . 'use entity2' . PHP_EOL
+            . PHP_EOL,
             $output
         );
     }
