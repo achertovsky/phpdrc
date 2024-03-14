@@ -31,6 +31,7 @@ class Validator implements ValidatorInterface
             [$fileContent->getNamespace() . '\\'],
             $config->getNamespacesAllowedInCoreNamespace($foundCoreNamespace)
         );
+        $allowedNamespaces[] = $foundCoreNamespace;
 
         $violatedUses = [];
         foreach ($fileContent->getUses() as $use) {

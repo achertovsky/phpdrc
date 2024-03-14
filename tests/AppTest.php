@@ -149,9 +149,12 @@ class AppTest extends TestCase
             ->with($violation2)
         ;
 
-        $this->app->run(
-            self::ROOT_DIR,
-            self::CONFIG_FILE_PATH
+        $this->assertEquals(
+            App::HAS_VIOLATIONS,
+            $this->app->run(
+                self::ROOT_DIR,
+                self::CONFIG_FILE_PATH
+            )
         );
     }
 }

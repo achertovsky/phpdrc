@@ -129,6 +129,19 @@ class ValidatorTest extends TestCase
                     ]
                 ])
             ],
+            'root namespace allows uses which derivates from it' => [
+                null,
+                new ParsedFileContent(
+                    self::FILE_PATH,
+                    self::NAMESPACE_SERVICE,
+                    [
+                        self::CLASS_ENTITY
+                    ]
+                ),
+                new Config([
+                    self::NAMESPACE_ROOT => []
+                ])
+            ],
             'valid namespace with allowed partial use of another namespace' => [
                 null,
                 new ParsedFileContent(
