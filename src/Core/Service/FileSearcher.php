@@ -19,8 +19,10 @@ class FileSearcher
     /**
      * @return string[]
      */
-    public function search(string $directory): array
-    {
+    public function search(
+        string $directory,
+        array $exclude = []
+    ): array {
         $baseDirectory = rtrim($this->baseDirectory, '/') . '/';
         $directoryIterator = new RecursiveDirectoryIterator($baseDirectory . $this->getDirectoryPath($directory));
         $recursiveIterator = new RecursiveIteratorIterator($directoryIterator);

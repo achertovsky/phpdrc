@@ -8,9 +8,13 @@ A tool that called to help checking dependency rule and not allow its violations
 ### Config
 Requires config to work. Example of config:
 ```
-- namespace\you\want\to\keep\clean:
-    - namespace\you\allow\there1
-    - namespace\you\allow\there2
+namespaces:
+    - namespace\you\want\to\keep\clean:
+        - namespace\you\allow\there1
+        - namespace\you\allow\there2
+exclude:
+    - path/to/dir
+    - path/to/file.php
 ```
 Keep in mind that in namespaces you want to check also in a list of allowed. So if you check `App\Core` all uses with that namespace prefix would be automatically allowed. If multiple entries match, the first matching entry will be the only one to be used.
 

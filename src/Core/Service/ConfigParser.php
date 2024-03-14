@@ -21,7 +21,11 @@ class ConfigParser
         }
 
         $configArray = $this->yamlParser->parse($path);
-        foreach ($configArray as $coreNamespace => $allowedNamespaces) {
+        if (!isset($configArray['namespaces'])) {
+            throw new LogicException('Config file should contain "namespaces" key');
+        }
+        $configNamespaces = $configArray['namespaces'];
+        foreach ($configNamespaces as $coreNamespace => $allowedNamespaces) {
             if (!is_string($coreNamespace)) {
                 throw new LogicException('Namespace should be a string');
             }
@@ -32,6 +36,16 @@ class ConfigParser
             }
         }
 
-        return new Config($configArray);
+        $exclude = $configArray['exclude'] ?? [];
+        foreach ($exclude as $entry) {
+            if (!is_string($entry)) {
+                throw new LogicException('Exclude entries should be a string');
+            }
+        }
+
+        return new Config(
+            $configNamespaces,
+            $exclude
+        );
     }
 }

@@ -49,4 +49,41 @@ class FileSearcherTest extends TestCase
             $filePaths
         );
     }
+
+    public function testWouldIgnoreExcludedFullPath(): void
+    {
+        $filePaths = $this->fileSearcher->search(
+            'file_searcher_fixtures/',
+            [
+                'file_searcher_fixtures/file3.php',
+            ]
+        );
+        sort($filePaths);
+
+        $this->assertEquals(
+            [
+                __DIR__ . '/file_searcher_fixtures/Directory1/file1.php',
+                __DIR__ . '/file_searcher_fixtures/Directory1/file2.php',
+            ],
+            $filePaths
+        );
+    }
+
+    public function testWouldIgnoreExcludedDir(): void
+    {
+        $filePaths = $this->fileSearcher->search(
+            'file_searcher_fixtures/',
+            [
+                'file_searcher_fixtures/Directory1',
+            ]
+        );
+        sort($filePaths);
+
+        $this->assertEquals(
+            [
+                __DIR__ . '/file_searcher_fixtures/file3.php',
+            ],
+            $filePaths
+        );
+    }
 }

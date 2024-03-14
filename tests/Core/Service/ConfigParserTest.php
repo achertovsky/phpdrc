@@ -33,7 +33,8 @@ class ConfigParserTest extends TestCase
     public function testParse(
         array $yamlParsedContent,
         array $expectedCoreNamespaces,
-        array $expectedNamespacesAllowedInCoreNamespace
+        array $expectedNamespacesAllowedInCoreNamespace,
+        array $expectedExclude = []
     ): void {
         $path = __FILE__;
 
@@ -54,6 +55,11 @@ class ConfigParserTest extends TestCase
             $expectedNamespacesAllowedInCoreNamespace,
             $config->getNamespacesAllowedInCoreNamespace('achertovsky\DRC')
         );
+
+        $this->assertEquals(
+            $expectedExclude,
+            $config->getExcludes()
+        );
     }
 
     // @phpstan-ignore-next-line
@@ -62,8 +68,10 @@ class ConfigParserTest extends TestCase
         return [
             'core namespaces with array' => [
                 [
-                    'achertovsky\DRC' => [
-                        'PHPUnit\Framework',
+                    'namespaces' => [
+                        'achertovsky\DRC' => [
+                            'PHPUnit\Framework',
+                        ],
                     ],
                 ],
                 [
@@ -75,12 +83,20 @@ class ConfigParserTest extends TestCase
             ],
             'core namespace has no allowed namespaces configured' => [
                 [
-                    'achertovsky\DRC' => [],
+                    'namespaces' => [
+                        'achertovsky\DRC' => [],
+                    ],
+                    'exclude' => [
+                        'whatever/path',
+                    ]
                 ],
                 [
                     'achertovsky\DRC',
                 ],
                 [
+                ],
+                [
+                    'whatever/path',
                 ],
             ],
         ];
@@ -106,12 +122,31 @@ class ConfigParserTest extends TestCase
         return [
             'core namespace is not a string' => [
                 [
-                    1 => [],
+                    'namespaces' => [
+                        1 => [],
+                    ],
                 ],
             ],
             'allowed namespace is not a string' => [
                 [
-                    'achertovsky\DRC' => [
+                    'namespaces' => [
+                        'achertovsky\DRC' => [
+                            1,
+                        ],
+                    ],
+                ],
+            ],
+            'no namespaces key' => [
+                [
+                    'no-namespaces' => [],
+                ],
+            ],
+            'exclude has no ' => [
+                [
+                    'namespaces' => [
+                        '' => [],
+                    ],
+                    'exclude' => [
                         1,
                     ],
                 ],

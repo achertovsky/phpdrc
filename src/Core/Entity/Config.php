@@ -10,9 +10,9 @@ class Config
      * @param array<string, array<string>> $coreNamespaces
      */
     public function __construct(
-        private array $coreNamespaces
+        private array $coreNamespaces,
+        private array $excludes = []
     ) {
-        $this->coreNamespaces = $coreNamespaces;
     }
 
     /**
@@ -29,5 +29,13 @@ class Config
     public function getNamespacesAllowedInCoreNamespace(string $namespace): array
     {
         return $this->coreNamespaces[$namespace];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getExcludes(): array
+    {
+        return $this->excludes;
     }
 }
