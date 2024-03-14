@@ -12,6 +12,9 @@ use achertovsky\DRC\Core\Service\ValidatorInterface;
 
 class App
 {
+    public const NO_VIOLATIONS = 0;
+    public const HAS_VIOLATIONS = 1;
+
     public function __construct(
         private ConfigParser $configParser,
         private FileSearcher $fileSearcher,
@@ -21,13 +24,12 @@ class App
     ) {
     }
 
-
     public function run(
         string $rootDir,
         string $configPath
-    ): void {
+    ): int {
+        $violationsStatus = self::NO_VIOLATIONS;
         $config = $this->configParser->parse($configPath);
-
         $filesList = $this->fileSearcher->search($rootDir);
         foreach ($filesList as $file) {
             $parsedFileContent = $this->fileParser->parse($file);
@@ -39,7 +41,11 @@ class App
                 continue;
             }
 
+            $violationsStatus = self::HAS_VIOLATIONS;
+
             $this->printer->print($violation);
         }
+
+        return $violationsStatus;
     }
 }

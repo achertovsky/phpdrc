@@ -31,7 +31,7 @@ $application
         InputOption::VALUE_OPTIONAL
     )
     ->setCode(function (InputInterface $input) use ($currentDirectory): int {
-        (new App(
+        return (new App(
             new ConfigParser(
                 new YamlParser()
             ),
@@ -43,8 +43,6 @@ $application
             '' . ($input->getOption('checkPath') ?? ''),
             '' . ($input->getOption('configPath') ?? $currentDirectory . '/phpdrc.yaml')
         );
-
-        return Command::SUCCESS;
     })
 ;
 

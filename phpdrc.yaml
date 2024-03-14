@@ -1,0 +1,6 @@
+achertovsky\DRC\Core:
+  - RegexIterator
+  - RecursiveRegexIterator
+  - RecursiveIteratorIterator
+  - RecursiveDirectoryIterator
+  - LogicException
