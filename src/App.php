@@ -30,7 +30,10 @@ class App
     ): int {
         $violationsStatus = self::NO_VIOLATIONS;
         $config = $this->configParser->parse($configPath);
-        $filesList = $this->fileSearcher->search($rootDir);
+        $filesList = $this->fileSearcher->search(
+            $rootDir,
+            $config->getExcludes()
+        );
         foreach ($filesList as $file) {
             $parsedFileContent = $this->fileParser->parse($file);
             $violation = $this->validator->validate(

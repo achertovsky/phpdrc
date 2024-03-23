@@ -9,7 +9,7 @@ A tool that called to help checking dependency rule and not allow its violations
 Requires config to work. Example of config:
 ```
 namespaces:
-    - namespace\you\want\to\keep\clean:
+    namespace\you\want\to\keep\clean:
         - namespace\you\allow\there1
         - namespace\you\allow\there2
 exclude:

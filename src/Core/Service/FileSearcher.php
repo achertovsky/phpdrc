@@ -24,6 +24,10 @@ class FileSearcher
         array $exclude = []
     ): array {
         $baseDirectory = rtrim($this->baseDirectory, '/') . '/';
+        $excludedPaths = array_map(
+            fn (string $file) => $baseDirectory . $file,
+            $exclude
+        );
         $directoryIterator = new RecursiveDirectoryIterator($baseDirectory . $this->getDirectoryPath($directory));
         $recursiveIterator = new RecursiveIteratorIterator($directoryIterator);
         $fileIterator = new RegexIterator(
@@ -34,6 +38,11 @@ class FileSearcher
 
         $files = [];
         foreach ($fileIterator as $file) {
+            foreach ($excludedPaths as $excludedPath) {
+                if (strpos($file[1], $excludedPath) === 0) {
+                    continue 2;
+                }
+            }
             /** @var array<int, string> $file */
             $files[] = $file[1];
         }
