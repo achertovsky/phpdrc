@@ -1,6 +1,10 @@
-achertovsky\DRC\Core:
-  - RegexIterator
-  - RecursiveRegexIterator
-  - RecursiveIteratorIterator
-  - RecursiveDirectoryIterator
-  - LogicException
+namespaces:
+  achertovsky\DRC\Core:
+    - RegexIterator
+    - RecursiveRegexIterator
+    - RecursiveIteratorIterator
+    - RecursiveDirectoryIterator
+    - LogicException
+  achertovsky\DRC\Tests: []
+exclude:
+  - tests

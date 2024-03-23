@@ -57,8 +57,9 @@ class AppTest extends TestCase
         ];
         $config = new Config(
             [
-                $rootNamespace => $allowedNamespaces
-            ]
+                $rootNamespace => $allowedNamespaces,
+            ],
+            []
         );
 
         $this->configParserMock
