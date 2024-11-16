@@ -1,3 +1,11 @@
 {
-    "output": "bin/phpdrc.phar"
+    "output": "bin/phpdrc",
+    "blacklist": [
+        "vendor/phpunit",
+        "vendor/sebastian",
+        "vendor/theseer",
+        "vendor/phar-io",
+        "vendor/myclabs",
+        "vendor/bin"
+    ]
 }
